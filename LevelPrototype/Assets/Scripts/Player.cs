@@ -25,6 +25,7 @@ namespace Invector.vCharacterController
 
         private vThirdPersonController playerController;
 
+
         void Start()
         {
             playerMotor = GetComponent<vThirdPersonMotor>();
@@ -33,6 +34,10 @@ namespace Invector.vCharacterController
             playerBody = GetComponent<Rigidbody>();
             Cursor.visible = false;
             playerAnim = gameObject.GetComponent<Animator>();
+        }
+
+        public void SetBoolAnimation()
+        {
         }
         void Update()
         {
@@ -43,19 +48,30 @@ namespace Invector.vCharacterController
             }
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                playerAnim.SetTrigger("Roll");
+                playerAnim.SetBool("Roll", true);
                 //rig.AddForce(moveDirection * 10, ForceMode.VelocityChange);
             }
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKeyUp(KeyCode.LeftShift))
             {
-                playerAnim.SetTrigger("Attack");
+                playerAnim.SetBool("Roll", false);
+                //rig.AddForce(moveDirection * 10, ForceMode.VelocityChange);
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                playerAnim.SetBool("Attack", true);
+                playerMotor.freeSpeed.runningSpeed = 1;
+            }
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                playerAnim.SetBool("Attack", false);
+                playerMotor.freeSpeed.runningSpeed = 4;
             }
             if (Input.GetKeyDown(KeyCode.Mouse1) && playerMotor.groundDistance > 2.5f)
             {
                 
                 IsGlide = true;
                 playerAnim.SetBool("IsGlide", IsGlide);
-                playerMotor.freeSpeed.rotationSpeed = 5;
+                playerMotor.freeSpeed.rotationSpeed = 3;
                 playerBody.drag = 4;
                 playerBody.useGravity = false;
             }
