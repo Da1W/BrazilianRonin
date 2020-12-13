@@ -61,6 +61,7 @@ public class vThirdPersonCamera : MonoBehaviour
     void Start()
     {
         Init();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void Init()
