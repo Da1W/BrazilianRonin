@@ -57,7 +57,7 @@ namespace Invector.vCharacterController
                 //rig.AddForce(moveDirection * 10, ForceMode.VelocityChange);
             }
             if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
+            {              
                 playerAnim.SetBool("Attack", true);
                 playerMotor.freeSpeed.runningSpeed = 1;
             }
